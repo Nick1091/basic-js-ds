@@ -52,10 +52,23 @@ module.exports = class BinarySearchTree {
     }
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+  find(data) {
+    return searchNode(this.correct, data);
+
+    function searchNode(node, data){
+      if(!node) {
+        return null;
+      }
+      if (node.data === data){
+        return node;
+      }
+      if(data > node.data){
+        return searchNode(node.right, data);
+      } else return searchNode(node.left, data);
+    }
+
+    }    
+  
 
   remove(data) {
     this.correct = removeNode(this.correct, data);
@@ -108,8 +121,13 @@ module.exports = class BinarySearchTree {
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
-
+    if(!this.correct){
+      return;
+    }
+    let node = this.correct;
+    while (node.right) {
+      node = node.right;
+    }
+    return node.data;
+    }
 }
